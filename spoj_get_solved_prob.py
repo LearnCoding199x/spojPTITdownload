@@ -16,7 +16,8 @@ def getInfoAndDownload(username,password):
         if data.find('sign in')>-1:
             print('Wrong username or password,Exitting....')
             return
-        os.makedirs('solved_prob')
+        solve = 'solved_prob_{}'.format(username)
+        os.makedirs(solve)
         url = 'http://www.spoj.com/PTIT/users/{}/'.format(username)
         r = s.post(url)
         data = r.text
@@ -59,9 +60,9 @@ def getInfoAndDownload(username,password):
                     id = id[id.find('_')+1:]
                     break
             url = 'http://www.spoj.com/PTIT/files/src/save/{}/'.format(id)
-            file_name = './solved_prob/'+id+'-src.cpp'
+            file_name = '{}/{}-src.cpp'.format(solve,solve_prob)
             response = s.get(url)
             if response.status_code == 200:
                 with open(file_name, 'wb') as f:
                     f.write(response.content)
-            print('Save file '+id+'-src.cpp')
+            print('Save file '+solve_prob+'-src.cpp')
