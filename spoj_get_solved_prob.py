@@ -17,7 +17,7 @@ def getInfoAndDownload(username,password):
             print('Wrong username or password,Exitting....')
             return
         os.makedirs('solved_prob')
-        url = 'http://www.spoj.com/PTIT/users/anonymousz/'
+        url = 'http://www.spoj.com/PTIT/users/{}/'.format(username)
         r = s.post(url)
         data = r.text
         soup = BeautifulSoup(data)
